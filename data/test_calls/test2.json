@@ -1,0 +1,50 @@
+[
+    {
+        "speaker": "Agent",
+        "text": "Hi, this is Linda from ABC Collections. Am I speaking with Mark?",
+        "stime": 0,
+        "etime": 5
+    },
+    {
+        "speaker": "Customer",
+        "text": "Yes, this is Mark. Who's calling?",
+        "stime": 6,
+        "etime": 10
+    },
+    {
+        "speaker": "Agent",
+        "text": "I'm calling about your overdue account. Honestly, I'm fed up with this fuckery. Can you verify your address for me?",
+        "stime": 11,
+        "etime": 20
+    },
+    {
+        "speaker": "Customer",
+        "text": "My address is 123 Elm Street, Springfield.",
+        "stime": 21,
+        "etime": 25
+    },
+    {
+        "speaker": "Agent",
+        "text": "Thanks, Mark. You have a balance of $310 due. When can I expect a payment?",
+        "stime": 26,
+        "etime": 32
+    },
+    {
+        "speaker": "Customer",
+        "text": "I'll arrange to pay soon.",
+        "stime": 33,
+        "etime": 36
+    },
+    {
+        "speaker": "Agent",
+        "text": "Alright, I'll follow up later. Don't let this shit slide again.",
+        "stime": 37,
+        "etime": 42
+    },
+    {
+        "speaker": "Customer",
+        "text": "Understood. Thanks.",
+        "stime": 43,
+        "etime": 45
+    }
+]

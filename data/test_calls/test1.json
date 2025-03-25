@@ -1,0 +1,74 @@
+[
+    {
+        "speaker": "Agent",
+        "text": "Hello, this is Dave from XYZ Collections. Am I speaking with Lisa?",
+        "stime": 0,
+        "etime": 5
+    },
+    {
+        "speaker": "Customer",
+        "text": "Yes, this is Lisa. Who is calling?",
+        "stime": 6,
+        "etime": 10
+    },
+    {
+        "speaker": "Agent",
+        "text": "I'm calling regarding your overdue account. Frankly, I'm pissed off about the constant delays—this shit is getting out of hand. Can you confirm your date of birth?",
+        "stime": 11,
+        "etime": 22
+    },
+    {
+        "speaker": "Customer",
+        "text": "Okay, it's March 3, 1988.",
+        "stime": 23,
+        "etime": 26
+    },
+    {
+        "speaker": "Agent",
+        "text": "Thanks, Lisa. Also, please verify your current address.",
+        "stime": 27,
+        "etime": 32
+    },
+    {
+        "speaker": "Customer",
+        "text": "It's 456 Oak Street, Springfield.",
+        "stime": 33,
+        "etime": 37
+    },
+    {
+        "speaker": "Agent",
+        "text": "Great, appreciate it. Now, you have an outstanding balance of $420. When are you planning to pay, or are you going to keep giving us fuck-all?",
+        "stime": 38,
+        "etime": 48
+    },
+    {
+        "speaker": "Customer",
+        "text": "I plan to make a partial payment today and the rest next week.",
+        "stime": 49,
+        "etime": 54
+    },
+    {
+        "speaker": "Agent",
+        "text": "Alright, I'll note the partial payment. Just make sure you don't fuck around with the due dates again.",
+        "stime": 55,
+        "etime": 63
+    },
+    {
+        "speaker": "Customer",
+        "text": "Understood. I'll get the payment sorted.",
+        "stime": 64,
+        "etime": 68
+    },
+    {
+        "speaker": "Agent",
+        "text": "Thanks. I'll follow up with you next week. Goodbye.",
+        "stime": 69,
+        "etime": 74
+    },
+    {
+        "speaker": "Customer",
+        "text": "Goodbye.",
+        "stime": 75,
+        "etime": 77
+    }
+]

@@ -1,0 +1,62 @@
+[
+    {
+        "speaker": "Agent",
+        "text": "Hello, this is Karen from Rapid Collections. Am I speaking with Tom?",
+        "stime": 0,
+        "etime": 5
+    },
+    {
+        "speaker": "Customer",
+        "text": "Yes, Tom speaking. What's up?",
+        "stime": 6,
+        "etime": 9
+    },
+    {
+        "speaker": "Agent",
+        "text": "I'm calling about your overdue balance. Look, Tom, this delay is fucking unacceptable. Can you please confirm your address?",
+        "stime": 10,
+        "etime": 20
+    },
+    {
+        "speaker": "Customer",
+        "text": "Alright, it's 321 Cedar Avenue, Springfield.",
+        "stime": 21,
+        "etime": 25
+    },
+    {
+        "speaker": "Agent",
+        "text": "Thanks. You owe $275. When are you planning to pay?",
+        "stime": 26,
+        "etime": 31
+    },
+    {
+        "speaker": "Customer",
+        "text": "I'll try to arrange a payment soon.",
+        "stime": 32,
+        "etime": 35
+    },
+    {
+        "speaker": "Agent",
+        "text": "Make sure you do, or I'll have to escalate this shit.",
+        "stime": 36,
+        "etime": 40
+    },
+    {
+        "speaker": "Customer",
+        "text": "Understood. Thanks for the reminder.",
+        "stime": 41,
+        "etime": 44
+    },
+    {
+        "speaker": "Agent",
+        "text": "Good. I'll follow up shortly. Goodbye.",
+        "stime": 45,
+        "etime": 48
+    },
+    {
+        "speaker": "Customer",
+        "text": "Goodbye.",
+        "stime": 49,
+        "etime": 51
+    }
+]

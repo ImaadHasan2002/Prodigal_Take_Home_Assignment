@@ -1,0 +1,62 @@
+[
+    {
+        "speaker": "Agent",
+        "text": "Good afternoon, this is John from Collections Inc. Am I speaking with Alice?",
+        "stime": 0,
+        "etime": 6
+    },
+    {
+        "speaker": "Customer",
+        "text": "Yes, this is Alice. What is this about?",
+        "stime": 7,
+        "etime": 11
+    },
+    {
+        "speaker": "Agent",
+        "text": "I'm calling regarding your account balance. Before we proceed, could you please confirm your date of birth?",
+        "stime": 12,
+        "etime": 20
+    },
+    {
+        "speaker": "Customer",
+        "text": "It's July 20, 1975.",
+        "stime": 21,
+        "etime": 24
+    },
+    {
+        "speaker": "Agent",
+        "text": "Thank you, Alice. Can you also verify your current address?",
+        "stime": 25,
+        "etime": 30
+    },
+    {
+        "speaker": "Customer",
+        "text": "I live at 789 Pine Road, Springfield.",
+        "stime": 31,
+        "etime": 35
+    },
+    {
+        "speaker": "Agent",
+        "text": "Great. Your outstanding balance is $500. How do you plan to clear it?",
+        "stime": 36,
+        "etime": 42
+    },
+    {
+        "speaker": "Customer",
+        "text": "I'll need some time to figure that out.",
+        "stime": 43,
+        "etime": 47
+    },
+    {
+        "speaker": "Agent",
+        "text": "Alright, I'll schedule a follow-up call for next week. And by the way, stop being such a pain in the ass about this!",
+        "stime": 48,
+        "etime": 55
+    },
+    {
+        "speaker": "Customer",
+        "text": "Thank you. Goodbye.",
+        "stime": 56,
+        "etime": 59
+    }
+]

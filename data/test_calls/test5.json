@@ -1,0 +1,74 @@
+[
+    {
+        "speaker": "Agent",
+        "text": "Hi, this is Paul from XYZ Collections. Am I speaking with Emily?",
+        "stime": 0,
+        "etime": 4
+    },
+    {
+        "speaker": "Customer",
+        "text": "Yes, this is Emily. Who is calling?",
+        "stime": 5,
+        "etime": 8
+    },
+    {
+        "speaker": "Agent",
+        "text": "I'm calling regarding your overdue balance. Before discussing any details, please confirm your date of birth.",
+        "stime": 9,
+        "etime": 17
+    },
+    {
+        "speaker": "Customer",
+        "text": "It's October 10, 1992.",
+        "stime": 18,
+        "etime": 21
+    },
+    {
+        "speaker": "Agent",
+        "text": "Thank you, Emily. Now, can you verify your current address?",
+        "stime": 22,
+        "etime": 26
+    },
+    {
+        "speaker": "Customer",
+        "text": "I'm at 987 Willow Lane, Springfield.",
+        "stime": 27,
+        "etime": 31
+    },
+    {
+        "speaker": "Agent",
+        "text": "Alright. Your outstanding balance is $385. Please let me know when you plan to pay.",
+        "stime": 32,
+        "etime": 39
+    },
+    {
+        "speaker": "Customer",
+        "text": "I'll manage a payment by the end of this week.",
+        "stime": 40,
+        "etime": 44
+    },
+    {
+        "speaker": "Agent",
+        "text": "Thanks, Emily. And please don't give me any bullshit about missed deadlines.",
+        "stime": 45,
+        "etime": 52
+    },
+    {
+        "speaker": "Customer",
+        "text": "Understood. Thank you.",
+        "stime": 53,
+        "etime": 56
+    },
+    {
+        "speaker": "Agent",
+        "text": "Great. I'll follow up with you soon. Goodbye.",
+        "stime": 57,
+        "etime": 61
+    },
+    {
+        "speaker": "Customer",
+        "text": "Goodbye.",
+        "stime": 62,
+        "etime": 64
+    }
+]
