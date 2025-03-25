@@ -118,18 +118,24 @@ The application will open in your default web browser.
 
 ### Project Structure
 
+Project Structure
+
 prodigal_take_home_assignment/
-├── app.py                # Main Streamlit application
-├── modules/              # Analysis modules
-│   ├── profanity.py      # Profanity detection
-│   ├── privacy.py        # Privacy/compliance violation detection
-│   ├── metrics.py        # Call quality metrics
-├── utils/                # Utility functions
-│   ├── loader.py         # File loading and parsing
-├── data/                 # Data storage
-│   ├── sample_calls/     # Sample call data
-├── requirements.txt      # Python dependencies
-└── README.md             # This file
+app.py - Main Streamlit application
+modules/ - Analysis modules
+profanity.py - Profanity detection
+privacy.py - Privacy/compliance violation detection
+metrics.py - Call quality metrics
+
+utils/ - Utility functions
+loader.py - File loading and parsing
+
+data/ - Data storage
+sample_calls/ - Sample call data
+test_calls/ - test calls (synthetically generated using LLMs)
+requirements.txt - Python dependencies
+
+README.md - Project documentatio
 
 
 ## Sample Call Data
