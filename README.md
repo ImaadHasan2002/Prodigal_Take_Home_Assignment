@@ -1,6 +1,6 @@
 # The Customer-Agent Call Analyzer
 
-The **The Customer-Agent Call Analyzer** is a robust application designed to analyze conversations between debt collection agents and borrowers. It evaluates compliance, professionalism, and call quality metrics by processing conversation data stored in YAML (or JSON) files with detailed utterance-level information.
+**The Customer-Agent Call Analyzer** is a robust application designed to analyze conversations between debt collection agents and borrowers. It evaluates compliance, professionalism, and call quality metrics by processing conversation data stored in YAML (or JSON) files with detailed utterance-level information.
 
 ---
 
