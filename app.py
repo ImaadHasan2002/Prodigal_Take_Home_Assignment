@@ -33,7 +33,7 @@ def main():
             if analysis_type in ["Profanity Detection", "Privacy & Compliance"]:
                 approach = st.sidebar.selectbox(
                     "Analysis Approach", 
-                    ["Pattern Matching (Regex)", "Machine Learning/LLM"]
+                    ["Pattern Matching (Regex)", "Machine Learning Approach"]
                 )
                 
                 approach_param = "Regex" if "Regex" in approach else "AI"

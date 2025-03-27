@@ -7,7 +7,7 @@
 ## Key Features
 
 - **Profanity Detection:**  
-  Identify calls where agents or borrowers used profane language.
+  Identify calls where agents or borrowers used profane language using regex pattern matching or AI-based detection.
 
 - **Privacy/Compliance Violation Detection:**  
   Detect instances where agents shared sensitive information without proper identity verification.
@@ -25,6 +25,18 @@
 ### Prerequisites
 
 - **Python 3.7+**
+- **Streamlit** (for the web application)
+- **PyYAML** (for YAML file parsing)
+- **Pandas** (for data manipulation)
+- **NumPy** (for numerical operations)
+- **Matplotlib** (for data visualization)
+- **Seaborn** (for enhanced data visualization)
+- **Scikit-learn** (for machine learning models)
+- **Transformers** (for LLMs and advanced NLP tasks)
+- **NLTK** (for natural language processing tasks)
+- **Spacy** (for advanced NLP tasks)
+- **TextBlob** (for sentiment analysis and text processing)
+- **Regex** (for pattern matching)
 - **pip** (Python package installer)
 
 ### Setup Instructions
@@ -61,7 +73,6 @@
 ## Running the Application
 
 Start the application by running the following command:
-
 ```bash
 streamlit run app.py
 ```
@@ -86,7 +97,7 @@ The application will open in your default web browser.
    - **Pattern Matching (Regex):**  
      Uses regular expression patterns for quick, deterministic analysis.
    - **Machine Learning/LLM:**  
-     Uses AI-based detection methods for more nuanced, context-aware analysis.
+    Uses a pretrained model for more nuanced, context-aware analysis, leveraging advanced natural language processing techniques to better understand the subtleties of conversations.
 
 4. **View Results:**
    - The analysis results will be displayed in the main panel.
@@ -98,12 +109,14 @@ The application will open in your default web browser.
 ### Analysis Approaches
 
 - **Pattern Matching (Regex):**
-  - Uses predefined patterns to detect profanity, sensitive information, and verification attempts.
+  - Uses predefined patterns to detect profanity, sensitive information, and verification attempts
   - Fast and deterministic but may miss nuanced context.
+  - For profanity detection, matches against a predefined list of profane words.
 
-- **Machine Learning/LLM:**
-  - Uses more sophisticated text analysis techniques.
-  - Better at understanding context but may be computationally more intensive.
+- **LLM Prompting:**
+  - Uses a Large Language Model with prompting strategies for profanity detection
+  - Better at understanding context and nuanced language.
+  - Falls back to regex detection if the LLM encounters an error.
 
 ### Call Quality Metrics
 
@@ -119,23 +132,19 @@ The application will open in your default web browser.
 ### Project Structure
 
 Project Structure
-
 prodigal_take_home_assignment/
-app.py - Main Streamlit application
-modules/ - Analysis modules
-profanity.py - Profanity detection
-privacy.py - Privacy/compliance violation detection
-metrics.py - Call quality metrics
-
-utils/ - Utility functions
-loader.py - File loading and parsing
-
-data/ - Data storage
-sample_calls/ - Sample call data
-test_calls/ - test calls (synthetically generated using LLMs)
-requirements.txt - Python dependencies
-
-README.md - Project documentatio
+├── app.py                  - Main Streamlit application
+├── modules/                - Analysis modules
+│   ├── profanity.py        - Profanity detection
+│   ├── privacy.py          - Privacy/compliance violation detection
+│   └── metrics.py          - Call quality metrics
+├── utils/                  - Utility functions
+│   └── loader.py           - File loading and parsing
+├── data/                   - Data storage
+│   ├── sample_calls/       - Sample call data
+│   └── test_calls/         - Test calls (synthetically generated using LLMs)
+├── requirements.txt        - Python dependencies
+└── README.md               - Project documentation
 
 
 ## Sample Call Data
@@ -162,10 +171,10 @@ utterances:
 
 - **Profanity Detection:**  
   - The regex approach works well for detecting explicit terms.  
-  - The AI/LLM method provides better context awareness for subtle cases.
+  - The LLM Prompting provides better context awareness for subtle cases but may be slower.
 
 - **Privacy Compliance:**  
-  - The AI/LLM approach is generally superior as it can better understand verification contexts.
+  - The Pretrained model approach is generally superior as it can better understand verification contexts.
 
 - **Call Quality Metrics:**  
   - Use the timeline visualization to identify patterns in agent-borrower interactions.
@@ -180,17 +189,13 @@ utterances:
   pip install -r requirements.txt
     ```
 
-
-
 - **File Format:**
     - Ensure the uploaded file is in YAML or JSON format.
     - Check the file structure and field names.
 
 - **Analysis Errors:**
-    - If the analysis fails, try a different approach (Regex vs. LLM).
+    - If the analysis fails, try a different approach (Regex vs. LLM Prompting).
     - Check the error messages for more information.
 
 - **Application Issues:**
     - If the application crashes, restart the server with `streamlit run app.py`.
-
-

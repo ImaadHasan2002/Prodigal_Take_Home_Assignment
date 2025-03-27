@@ -3,6 +3,13 @@ import requests
 import os
 import nltk
 from nltk.tokenize import word_tokenize
+from transformers import pipeline, AutoModelForCausalLM, AutoTokenizer
+import json
+
+# Using  language model for toxicity detection
+model_name = "meta-llama/Llama-2-7b-chat-hf"
+llm_model = AutoModelForCausalLM.from_pretrained(model_name)
+llm_tokenizer = AutoTokenizer.from_pretrained(model_name)
 
 # Download necessary NLTK resources
 try:
@@ -10,7 +17,7 @@ try:
 except LookupError:
     nltk.download('punkt', quiet=True)
 
-# Common profanity words list (simplified for demonstration)
+# Fallback profanity list (kept for baseline filtering)
 PROFANE_WORDS = [
     'ass', 'damn', 'hell', 'shit', 'fuck', 'bitch', 'crap', 'bastard', 'asshole',
     'cock', 'dick', 'pussy', 'whore', 'slut', 'piss', 'bloody', 'cunt', 'bollocks',
@@ -18,97 +25,104 @@ PROFANE_WORDS = [
 ]
 
 def regex_detection(text):
-    """Detect profanity using regex patterns"""
+    """Fallback regex-based profanity detection"""
     text = text.lower()
-    # Create a pattern to match whole words only
-    pattern = r'\b(' + '|'.join(PROFANE_WORDS) + r')\b'
+    pattern = r'\b(' + '|'.join(re.escape(word) for word in PROFANE_WORDS) + r')\b'
     matches = re.findall(pattern, text)
-    return len(matches) > 0, matches
+    return bool(matches), matches
 
-def ai_detection(text):
+def llm_toxicity_detection(text):
     """
-    Detect profanity using AI/LLM approach
-    This is a simplified implementation - in a real scenario, you might use:
-    1. A pre-trained sentiment/toxicity model 
-    2. API call to a service like OpenAI, Content Moderation API, etc.
+    Detect toxicity using a large language model with multiple prompting strategies
+    
+    Args:
+        text (str): Text to analyze for toxicity
+    
+    Returns:
+        tuple: (is_toxic, details)
     """
-    try:
-        # Option 1: Use a local approach (similar to regex but more sophisticated)
-        text_tokens = word_tokenize(text.lower())
-        # Look for profane words and nearby context
-        profanity_found = False
-        matches = []
-        
-        for i, token in enumerate(text_tokens):
-            if token in PROFANE_WORDS:
-                profanity_found = True
-                # Get context (up to 3 words before and after)
-                start = max(0, i-3)
-                end = min(len(text_tokens), i+4)
-                context = ' '.join(text_tokens[start:end])
-                matches.append(context)
-        
-        # Option 2: If we have an API key for OpenAI or similar service
-        # Uncomment the section below and add your API key to use it
-        """
-        API_KEY = os.getenv("OPENAI_API_KEY")
-        if API_KEY:
-            headers = {
-                "Authorization": f"Bearer {API_KEY}",
-                "Content-Type": "application/json"
-            }
+    # Multiple prompting strategies for robust detection
+    toxicity_prompts = [
+        f"Is the following text highly offensive or toxic? Respond with a JSON object containing 'is_toxic' (boolean) and 'reason' (string): {text}",
+        f"Carefully analyze the text for potentially harmful language. Provide a JSON response with toxicity assessment: {text}",
+        f"Evaluate the toxicity level of this text. Respond strictly with a JSON object with 'is_toxic' and explain why: {text}"
+    ]
+    
+    for prompt in toxicity_prompts:
+        try:
+            # Tokenize and generate response
+            inputs = llm_tokenizer(prompt, return_tensors="pt", truncation=True, max_length=512)
             
-            payload = {
-                "model": "text-moderation-latest",
-                "input": text
-            }
-            
-            response = requests.post(
-                "https://api.openai.com/v1/moderations",
-                headers=headers,
-                json=payload
+            # Generate response
+            outputs = llm_model.generate(
+                **inputs, 
+                max_new_tokens=100, 
+                num_return_sequences=1,
+                temperature=0.2
             )
             
-            if response.status_code == 200:
-                result = response.json()
-                return result["results"][0]["flagged"], []
-        """
+            # Decode response
+            response = llm_tokenizer.decode(outputs[0], skip_special_tokens=True)
+            
+            # Extract JSON from response
+            json_match = re.search(r'\{.*\}', response, re.DOTALL)
+            if json_match:
+                try:
+                    result = json.loads(json_match.group(0))
+                    if isinstance(result.get('is_toxic'), bool):
+                        return result.get('is_toxic'), result
+                except json.JSONDecodeError:
+                    continue
         
-        return profanity_found, matches
+        except Exception as e:
+            print(f"LLM detection error: {str(e)}")
     
-    except Exception as e:
-        print(f"Error in AI detection: {str(e)}")
-        # Fall back to regex if AI approach fails
-        return regex_detection(text)
+    # Fallback to regex if LLM fails
+    regex_result, matches = regex_detection(text)
+    return regex_result, {"is_toxic": regex_result, "method": "regex", "matches": matches}
 
-def check_profanity_in_text(text, approach="Regex"):
-    """Check if text contains profanity using the specified approach"""
-    if approach == "Regex":
-        has_profanity, _ = regex_detection(text)
-    else:
-        has_profanity, _ = ai_detection(text)
-    
-    return has_profanity
-
-def analyze(call_data, approach="Regex"):
+def check_profanity_in_text(text, approach="llm"):
     """
-    Analyze call data for profanity
-    Returns: {
-        "agent_profanity": bool,
-        "borrower_profanity": bool
-    }
+    Check profanity in text with flexible detection approach
+    
+    Args:
+        text (str): Text to check
+        approach (str): Detection method ('llm', 'regex')
+    
+    Returns:
+        bool: Whether text is considered toxic
+    """
+    approach = approach.lower()
+    if approach == "llm":
+        return llm_toxicity_detection(text)[0]
+    elif approach == "regex":
+        return regex_detection(text)[0]
+    else:
+        print(f"Invalid approach '{approach}'. Supported approaches are 'llm' and 'regex'.")
+        return False
+
+def analyze(call_data, approach="llm"):
+    """
+    Analyze call data for profanity with enhanced detection
+    
+    Args:
+        call_data (list): List of call utterances
+        approach (str): Detection method
+    
+    Returns:
+        dict: Profanity status for agent and borrower
     """
     agent_profanity = False
     borrower_profanity = False
     
     for utterance in call_data:
-        speaker = utterance["speaker"].lower()
-        text = utterance["text"]
+        speaker = utterance.get("speaker", "").strip().lower()
+        text = utterance.get("text", "")
         
         if speaker == "agent":
             if check_profanity_in_text(text, approach):
                 agent_profanity = True
-        elif speaker == "borrower" or speaker == "customer":
+        elif speaker in {"borrower", "customer"}:
             if check_profanity_in_text(text, approach):
                 borrower_profanity = True
     
